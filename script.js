@@ -1,5 +1,8 @@
 const container = document.querySelector(".container");
 const newBookButton = document.querySelector(".newbook-button");
+const newBookDialog = document.querySelector(".newbook-dialog");
+const newBookSubmit = document.querySelector(".newbook-submit");
+const newBookForm = document.querySelector(".newbook-form");
 const readStatus = document.createElement("button");
 const removeBook = document.createElement("button");
 const myLibrary = [];
@@ -12,14 +15,14 @@ function Book(title, author, year, pages, read) {
     this.author = author;
     this.year = year;
     this.pages = pages + " pages";
-    this.read = read;
+    this.read = read.charAt(0).toUpperCase() + read.slice(1);
     this.id = self.crypto.randomUUID();
 };
 
 Book.prototype.toggleRead = function() {
     if(this.read === "Read") {
         this.read = "Not read";
-    };
+    } else this.read = "Read";
 };
 
 function addBookToLibrary(title, author, year, pages, read) {
@@ -47,10 +50,26 @@ function displayBooks() {
 };
 
 newBookButton.addEventListener("click", () => {
-    const newBookDialog = document.querySelector(".newbook-dialog");
+    newBookForm.reset();
     newBookDialog.showModal();
     console.log("click");
 });
+newBookDialog.addEventListener("close", (e) => {
+    console.log(newBookDialog.returnValue);
+});
+
+newBookSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    const newBookAuthor = document.querySelector("#author");
+    const newBookTitle = document.querySelector("#title");
+    const newBookYear = document.querySelector("#year");
+    const newBookPages = document.querySelector("#pages");
+    const newBookRead = document.querySelector("#read");
+    addBookToLibrary(newBookTitle.value, newBookAuthor.value, newBookYear.value, newBookPages.value, newBookRead.value)
+    newBookDialog.close();
+});
+
+
 
 addBookToLibrary("The Hobbit", "JRR Tolkien", 1957, 310, "Not read");
 addBookToLibrary("Hyperion", "Dan Simmons", 1989, 482, "Read");
