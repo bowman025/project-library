@@ -9,26 +9,25 @@
 </head>
 <body>
     <h1>LIBRARY</h1>
-    <div class="container">
-        <dialog class="newbook-dialog" closedby="closerequest">
-            <form method="dialog" class="newbook-form">
-                <label for="title">*Title:</label>
-                <input required type="text" name="title" id="title"><br>
-                <label for="author">*Author:</label>
-                <input required type="text" name="author" id="author"><br>
-                <label for="year">Year:</label>
-                <input type="number" name="year" id="year" min="-3000" max="2100"><br>
-                <label for="pages">N<sup>o</sup> of pages:</label>
-                <input type="number" name="pages" id="pages" min="1" max="9999"><br>
-                <label for="read">Have you read the book?</label>
-                <select name="read" id="read">
-                    <option value="true">Read</option>
-                    <option value="false">Not read</option>
-                </select><br>
-                <button class="newbook-submit">Submit</button>
-            </form>
-        </dialog>
-    </div>
+    <div class="container"></div>
+    <dialog class="newbook-dialog" closedby="closerequest">
+        <form method="dialog" class="newbook-form">
+            <label for="title">*Title:</label>
+            <input required type="text" name="title" id="title"><br>
+            <label for="author">*Author:</label>
+            <input required type="text" name="author" id="author"><br>
+            <label for="year">Year:</label>
+            <input type="number" name="year" id="year" min="-3000" max="2100"><br>
+            <label for="pages">N<sup>o</sup> of pages:</label>
+            <input type="number" name="pages" id="pages" min="1" max="9999"><br>
+            <label for="read">Have you read the book?</label>
+            <select name="read" id="read">
+                <option value="read">Read</option>
+                <option value="not read">Not read</option>
+            </select><br>
+            <button class="newbook-submit">Submit</button>
+        </form>
+    </dialog>
     <button type="button" class="newbook-button">NEW BOOKS</button>  
 </body>
 </html>
