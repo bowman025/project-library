@@ -9,7 +9,25 @@
 </head>
 <body>
     <h1>LIBRARY</h1>
-    <div class="container"></div>
-    <button type="button" class="newbooks">NEW BOOKS</button>
+    <div class="container">
+        <dialog class="newbook-dialog" closedby="any">
+            <form action="" method="dialog" class="newbook-form">
+                <label for="title">*Title:</label>
+                <input required type="text" name="title" id="title"><br>
+                <label for="author">*Author:</label>
+                <input required type="text" name="author" id="author"><br>
+                <label for="year">Year:</label>
+                <input type="number" name="year" id="year" min="1" max="2099"><br>
+                <label for="pages">N<sup>o</sup> of pages:</label>
+                <input type="number" name="pages" id="pages" min="1" max="9999"><br>
+                <select name="read" id="read">
+                    <option value="true">Read</option>
+                    <option value="false">Not read</option>
+                </select><br>
+                <button>Submit</button>
+            </form>
+        </dialog>
+    </div>
+    <button type="button" class="newbook-button">NEW BOOKS</button>  
 </body>
 </html>

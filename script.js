@@ -1,4 +1,7 @@
 const container = document.querySelector(".container");
+const newBookButton = document.querySelector(".newbook-button");
+const readStatus = document.createElement("button");
+const removeBook = document.createElement("button");
 const myLibrary = [];
 
 function Book(title, author, year, pages, read) {
@@ -13,6 +16,12 @@ function Book(title, author, year, pages, read) {
     this.id = self.crypto.randomUUID();
 };
 
+Book.prototype.toggleRead = function() {
+    if(this.read === "Read") {
+        this.read = "Not read";
+    };
+};
+
 function addBookToLibrary(title, author, year, pages, read) {
     const book = new Book(title, author, year, pages, read);
     myLibrary.push(book);
@@ -22,6 +31,7 @@ function displayBooks() {
     for(i = 0; i < myLibrary.length; i++) {
         const card = document.createElement("div");
         card.classList.add("books");
+        card.setAttribute("data-id", myLibrary[i].id);
         container.appendChild(card);
         const header = document.createElement("h2");
         header.textContent = myLibrary[i].title + " | " + myLibrary[i].author;
@@ -33,16 +43,18 @@ function displayBooks() {
         read.classList.add("read");
         card.appendChild(read);
         read.textContent = myLibrary[i].read;
-        const removeBook = document.createElement("button");
-        removeBook.classList.add("remove");
-        removeBook.textContent = "Remove";
-        card.appendChild(removeBook);
     };
 };
+
+newBookButton.addEventListener("click", () => {
+    const newBookDialog = document.querySelector(".newbook-dialog");
+    newBookDialog.showModal();
+    console.log("click");
+});
 
 addBookToLibrary("The Hobbit", "JRR Tolkien", 1957, 310, "Not read");
 addBookToLibrary("Hyperion", "Dan Simmons", 1989, 482, "Read");
 addBookToLibrary("The Blade Itself", "Joe Abercrombie", 2006, 529, "Read");
-addBookToLibrary("Bullshit Jobs", "David Graeber", 2011, 368, "Currently reading");
+addBookToLibrary("Bullshit Jobs", "David Graeber", 2011, 368, "Not read");
 
-displayBooks();
+displayBooks(); 
