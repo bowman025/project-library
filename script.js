@@ -24,21 +24,25 @@ function displayBooks() {
         card.classList.add("books");
         container.appendChild(card);
         const header = document.createElement("h2");
+        header.textContent = myLibrary[i].title + " | " + myLibrary[i].author;
         card.appendChild(header);
         const paragraph = document.createElement("p");
-        card.appendChild(paragraph);
-        const readingStatus = document.createElement("p");
-        readingStatus.classList.add("readingStatus");
-        card.appendChild(readingStatus);
-        header.textContent = myLibrary[i].title + " | " + myLibrary[i].author;
         paragraph.textContent = myLibrary[i].year  + " | " + myLibrary[i].pages;
-        readingStatus.textContent = myLibrary[i].read;
+        card.appendChild(paragraph);
+        const read = document.createElement("p");
+        read.classList.add("read");
+        card.appendChild(read);
+        read.textContent = myLibrary[i].read;
+        const removeBook = document.createElement("button");
+        removeBook.classList.add("remove");
+        removeBook.textContent = "Remove";
+        card.appendChild(removeBook);
     };
 };
 
-addBookToLibrary("The Hobbit", "JRR Tolkien", 1957, 310, "not read");
-addBookToLibrary("Hyperion", "Dan Simmons", 1989, 482, "read");
-addBookToLibrary("The Blade Itself", "Joe Abercrombie", 2006, 529, "read");
-addBookToLibrary("Bullshit Jobs", "David Graeber", 2011, 368, "currently reading");
+addBookToLibrary("The Hobbit", "JRR Tolkien", 1957, 310, "Not read");
+addBookToLibrary("Hyperion", "Dan Simmons", 1989, 482, "Read");
+addBookToLibrary("The Blade Itself", "Joe Abercrombie", 2006, 529, "Read");
+addBookToLibrary("Bullshit Jobs", "David Graeber", 2011, 368, "Currently reading");
 
 displayBooks();
