@@ -8,6 +8,14 @@
 
 body {
     line-height: 1.5;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: whitesmoke;
+    background-image: linear-gradient(to right bottom, #2d2359, #252c5e, #203561, #1e3c62, #214362);
 }
 
 img, picture, video, canvas, svg {
@@ -32,4 +40,20 @@ h1, h2, h3, h4, h5, h6 {
 
 #root, #__next {
   isolation: isolate;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    max-width: 75%;
+    margin: 30px;
+    padding: 30px;
+    border: 1px solid whitesmoke;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+}
+
+.books {
+    padding: 10px;
+    border: 1px solid whitesmoke;
 }
