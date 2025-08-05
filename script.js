@@ -3,7 +3,6 @@ const newBookOpen = document.querySelector(".newbook-open");
 const newBookDialog = document.querySelector(".newbook-dialog");
 const newBookForm = document.querySelector(".newbook-form");
 const newBookSubmit = document.querySelector(".newbook-submit");
-const readStatus = document.createElement("button");
 
 const myLibrary = [];
 
@@ -96,7 +95,11 @@ newBookDialog.addEventListener("close", (e) => {
 
 newBookSubmit.addEventListener("click", (e) => {
     e.preventDefault();
-    addBookToLibrary(document.querySelector("#title").value, document.querySelector("#author").value, document.querySelector("#year").value, document.querySelector("#pages").value, document.querySelector("#read").value);
+    addBookToLibrary(document.querySelector("#title").value, 
+    document.querySelector("#author").value, 
+    document.querySelector("#year").value, 
+    document.querySelector("#pages").value, 
+    document.querySelector("#read").value);
     resetBookList(container);
     displayBooks();
     newBookDialog.close("New book added.");
