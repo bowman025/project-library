@@ -44,8 +44,8 @@ function displayBooks() {
     card.appendChild(paragraph);
     const read = document.createElement("p");
     read.classList.add("readstatus");
-    card.appendChild(read);
     read.textContent = myLibrary[i].read;
+    card.appendChild(read);
     const removeBook = document.createElement("button");
     removeBook.classList.add("newbook-remove")
     removeBook.textContent = "Remove";
@@ -55,7 +55,7 @@ function displayBooks() {
     toggleReadStatus.classList.add("toggle-readstatus");
     toggleReadStatus.textContent = "Toggle";
     read.appendChild(toggleReadStatus);
-    toggleRead(toggleReadStatus, card);
+    toggleReadNow(toggleReadStatus, card, read);
     };
 };
 
@@ -71,25 +71,23 @@ function removeBooks(removeBook, card) {
         myLibrary.splice(bookToRemove, 1);
         resetBookList(container);
         displayBooks();
-        console.log("click");
         console.log(myLibrary);
     });
 };
 
-function toggleRead(toggleReadStatus, card) {
+function toggleReadNow(toggleReadStatus, card, read) {
     toggleReadStatus.addEventListener("click", () => {
         const bookToToggle = myLibrary.find(book => book.dataID === card.dataset.id);
         bookToToggle.toggleRead();
         console.log(bookToToggle);
-        resetBookList(container);
-        displayBooks();
+        read.textContent = bookToToggle.read;
+        read.appendChild(toggleReadStatus);
     });
 };
 
 newBookOpen.addEventListener("click", () => {
     newBookForm.reset();
     newBookDialog.showModal();
-    console.log("click");
 });
 
 newBookDialog.addEventListener("close", (e) => {
@@ -104,7 +102,7 @@ newBookSubmit.addEventListener("click", (e) => {
     newBookDialog.close("New book added.");
 });
 
-addBookToLibrary("The Hobbit", "JRR Tolkien", 1957, 310, "Not read");
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 1957, 310, "Not read");
 addBookToLibrary("Hyperion", "Dan Simmons", 1989, 482, "Read");
 addBookToLibrary("The Blade Itself", "Joe Abercrombie", 2006, 529, "Read");
 addBookToLibrary("Bullshit Jobs", "David Graeber", 2011, 368, "Not read");
