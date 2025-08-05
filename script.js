@@ -43,7 +43,7 @@ function displayBooks() {
     paragraph.textContent = myLibrary[i].year  + " | " + myLibrary[i].pages;
     card.appendChild(paragraph);
     const read = document.createElement("p");
-    read.classList.add("read");
+    read.classList.add("readstatus");
     card.appendChild(read);
     read.textContent = myLibrary[i].read;
     const removeBook = document.createElement("button");
@@ -51,6 +51,17 @@ function displayBooks() {
     removeBook.textContent = "Remove";
     card.appendChild(removeBook);
     removeBooks(removeBook, card);
+    const toggleReadStatus = document.createElement("button");
+    toggleReadStatus.classList.add("toggle-readstatus");
+    toggleReadStatus.textContent = "Toggle";
+    read.appendChild(toggleReadStatus);
+    toggleRead(toggleReadStatus, card);
+    };
+};
+
+function resetBookList(container) {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
     };
 };
 
@@ -58,17 +69,21 @@ function removeBooks(removeBook, card) {
     removeBook.addEventListener("click", () => {
         const bookToRemove = myLibrary.findIndex(book => book.dataID === card.dataset.id);
         myLibrary.splice(bookToRemove, 1);
-        resetList(container);
+        resetBookList(container);
         displayBooks();
         console.log("click");
         console.log(myLibrary);
     });
 };
 
-function resetList(container) {
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    };
+function toggleRead(toggleReadStatus, card) {
+    toggleReadStatus.addEventListener("click", () => {
+        const bookToToggle = myLibrary.find(book => book.dataID === card.dataset.id);
+        bookToToggle.toggleRead();
+        console.log(bookToToggle);
+        resetBookList(container);
+        displayBooks();
+    });
 };
 
 newBookOpen.addEventListener("click", () => {
@@ -84,7 +99,7 @@ newBookDialog.addEventListener("close", (e) => {
 newBookSubmit.addEventListener("click", (e) => {
     e.preventDefault();
     addBookToLibrary(document.querySelector("#title").value, document.querySelector("#author").value, document.querySelector("#year").value, document.querySelector("#pages").value, document.querySelector("#read").value);
-    resetList(container);
+    resetBookList(container);
     displayBooks();
     newBookDialog.close("New book added.");
 });
