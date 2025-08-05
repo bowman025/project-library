@@ -1,5 +1,5 @@
 const container = document.querySelector(".container");
-const newBookButton = document.querySelector(".newbook-button");
+const newBookOpen = document.querySelector(".newbook-open");
 const newBookDialog = document.querySelector(".newbook-dialog");
 const newBookForm = document.querySelector(".newbook-form");
 const newBookSubmit = document.querySelector(".newbook-submit");
@@ -16,7 +16,7 @@ function Book(title, author, year, pages, read) {
     this.year = year;
     this.pages = pages + " pages";
     this.read = read.charAt(0).toUpperCase() + read.slice(1);
-    this.id = self.crypto.randomUUID();
+    this.dataID = self.crypto.randomUUID();
 };
 
 Book.prototype.toggleRead = function() {
@@ -30,10 +30,11 @@ function addBookToLibrary(title, author, year, pages, read) {
     myLibrary.push(book);
 };
 
-function displayBooks() { 
+function displayBooks() {
+    for(i = 0; i < myLibrary.length; i++) {
     const card = document.createElement("div");
     card.classList.add("books");
-    card.setAttribute("data-id", myLibrary[i].id);
+    card.setAttribute("data-id", myLibrary[i].dataID);
     container.appendChild(card);
     const header = document.createElement("h2");
     header.textContent = myLibrary[i].title + " | " + myLibrary[i].author;
@@ -46,11 +47,31 @@ function displayBooks() {
     card.appendChild(read);
     read.textContent = myLibrary[i].read;
     const removeBook = document.createElement("button");
-    removeBook.textContent = "Delete";
+    removeBook.classList.add("newbook-remove")
+    removeBook.textContent = "Remove";
     card.appendChild(removeBook);
+    removeBooks(removeBook, card);
+    };
 };
 
-newBookButton.addEventListener("click", () => {
+function removeBooks(removeBook, card) {
+    removeBook.addEventListener("click", () => {
+        const bookToRemove = myLibrary.findIndex(book => book.dataID === card.dataset.id);
+        myLibrary.splice(bookToRemove, 1);
+        resetList(container);
+        displayBooks();
+        console.log("click");
+        console.log(myLibrary);
+    });
+};
+
+function resetList(container) {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    };
+};
+
+newBookOpen.addEventListener("click", () => {
     newBookForm.reset();
     newBookDialog.showModal();
     console.log("click");
@@ -63,6 +84,7 @@ newBookDialog.addEventListener("close", (e) => {
 newBookSubmit.addEventListener("click", (e) => {
     e.preventDefault();
     addBookToLibrary(document.querySelector("#title").value, document.querySelector("#author").value, document.querySelector("#year").value, document.querySelector("#pages").value, document.querySelector("#read").value);
+    resetList(container);
     displayBooks();
     newBookDialog.close("New book added.");
 });
@@ -72,8 +94,4 @@ addBookToLibrary("Hyperion", "Dan Simmons", 1989, 482, "Read");
 addBookToLibrary("The Blade Itself", "Joe Abercrombie", 2006, 529, "Read");
 addBookToLibrary("Bullshit Jobs", "David Graeber", 2011, 368, "Not read");
 
-
-for(i = 0; i < myLibrary.length; i++) {
 displayBooks();
-};
-
