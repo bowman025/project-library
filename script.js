@@ -6,22 +6,20 @@ const newBookSubmit = document.querySelector(".newbook-submit");
 
 const myLibrary = [];
 
-function Book(title, author, year, pages, read) {
-    if(!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+    constructor(title, author, year, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.pages = pages + " pages";
+        this.read = read.charAt(0).toUpperCase() + read.slice(1);
+        this.dataID = self.crypto.randomUUID();
     };
-    this.title = title;
-    this.author = author;
-    this.year = year;
-    this.pages = pages + " pages";
-    this.read = read.charAt(0).toUpperCase() + read.slice(1);
-    this.dataID = self.crypto.randomUUID();
-};
-
-Book.prototype.toggleRead = function() {
-    if(this.read === "Read") {
-        this.read = "Not read";
-    } else this.read = "Read";
+    toggleRead() {
+        if(this.read === "Read") {
+            this.read = "Not read";
+        } else this.read = "Read";
+    };
 };
 
 function addBookToLibrary(title, author, year, pages, read) {
