@@ -144,3 +144,24 @@ h2, p {
 .toggle-readstatus {
   margin-left: 10px;
 }
+
+#title,
+#author,
+#year,
+#pages {
+  outline: none;
+}
+
+#title:user-valid,
+#author:user-valid,
+#year:user-valid,
+#pages:user-valid {
+  outline: 2px solid rgb(15, 194, 24);
+}
+
+#title:user-invalid,
+#author:user-invalid,
+#year:user-invalid,
+#pages:user-invalid {
+  outline: 2px solid rgb(194, 15, 89);
+}

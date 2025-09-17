@@ -13,20 +13,20 @@
     <dialog class="newbook-dialog" closedby="any">
         <form method="dialog" class="newbook-form">
             <div class="input">
-                <label for="title">Title:</label>
-                <input type="text" name="title" id="title">
+                <label for="title">* Title:</label>
+                <input required type="text" name="title" id="title" minlength="1" maxlength="144">
             </div>
             <div class="input">
-                <label for="author">Author:</label>
-                <input type="text" name="author" id="author">
+                <label for="author">*Author:</label>
+                <input required type="text" name="author" id="author" minlength="1" maxlength="144">
             </div>
             <div class="input">
-                <label for="year">Year:</label>
-                <input type="number" name="year" id="year" min="-3000" max="2100">
+                <label for="year">*Year:</label>
+                <input required type="number" name="year" id="year" min="1" max="2025">
             </div>
             <div class="input">
-                <label for="pages">N<sup>o</sup> of pages:</label>
-                <input type="number" name="pages" id="pages" min="1" max="9999">
+                <label for="pages">*N<sup>o</sup> of pages:</label>
+                <input required type="number" name="pages" id="pages" min="1" max="16000">
             </div>
             <div class="input">
                 <label for="read">Have you read the book?</label>

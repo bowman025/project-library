@@ -4,6 +4,11 @@ const newBookDialog = document.querySelector(".newbook-dialog");
 const newBookForm = document.querySelector(".newbook-form");
 const newBookSubmit = document.querySelector(".newbook-submit");
 
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const year = document.querySelector("#year");
+const pages = document.querySelector("#pages");
+
 const myLibrary = [];
 
 class Book {
@@ -82,7 +87,7 @@ function toggleReadNow(toggleReadStatus, card, read) {
     });
 };
 
-newBookOpen.addEventListener("click", () => {
+newBookOpen.addEventListener("click", (e) => {
     newBookForm.reset();
     newBookDialog.showModal();
 });
@@ -91,7 +96,39 @@ newBookDialog.addEventListener("close", (e) => {
     console.log(newBookDialog.returnValue);
 });
 
-newBookSubmit.addEventListener("click", (e) => {
+title.addEventListener("input", (e) => {
+    if(title.validity.valueMissing) {
+        title.setCustomValidity("The title value is missing!");
+    } else title.setCustomValidity("");
+});
+
+author.addEventListener("input", (e) => {
+    if(author.validity.valueMissing) {
+        author.setCustomValidity("The author value is missing!");
+    } else author.setCustomValidity("");
+});
+
+year.addEventListener("input", (e) => {
+    if(year.validity.valueMissing) {
+        year.setCustomValidity("The year value is missing!");
+    } else if(year.validity.rangeUnderflow) {
+        year.setCustomValidity("The year value should not be lower than 1!");
+    } else if(year.validity.rangeOverflow) {
+        year.setCustomValidity("The year value should not be higher than 2025!");
+    } else year.setCustomValidity("");
+});
+
+pages.addEventListener("input", (e) => {
+    if(pages.validity.valueMissing) {
+        pages.setCustomValidity("The page value is missing!");
+    } else if(pages.validity.rangeUnderflow) {
+        pages.setCustomValidity("The page value should not be lower than 1!");
+    } else if(pages.validity.rangeOverflow) {
+        pages.setCustomValidity("The page value should not be higher than 16000!");
+    } else pages.setCustomValidity("");
+});
+
+newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     addBookToLibrary(document.querySelector("#title").value, 
     document.querySelector("#author").value, 
